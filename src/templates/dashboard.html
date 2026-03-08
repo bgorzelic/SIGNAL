@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SIGNAL: Network Intelligence Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a2a;
+            color: #00ff00;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard {
+            background-color: #0f0f3a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #00ff00;
+        }
+        #network-data {
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>🌐 SIGNAL: Network Intelligence</h1>
+        
+        <div id="device-info">
+            <h2>Device Information</h2>
+            <pre id="device-details"></pre>
+        </div>
+
+        <div id="network-scan">
+            <h2>Network Scan Results</h2>
+            <pre id="network-data"></pre>
+        </div>
+    </div>
+
+    <script>
+        async function updateDashboard() {
+            try {
+                const deviceResponse = await fetch('/api/device_info');
+                const deviceInfo = await deviceResponse.json();
+                document.getElementById('device-details').textContent = JSON.stringify(deviceInfo, null, 2);
+
+                const networkResponse = await fetch('/api/network_scan');
+                const networkData = await networkResponse.json();
+                document.getElementById('network-data').textContent = JSON.stringify(networkData, null, 2);
+            } catch (error) {
+                console.error('Dashboard update failed:', error);
+            }
+        }
+
+        // Update dashboard every 30 seconds
+        updateDashboard();
+        setInterval(updateDashboard, 30000);
+    </script>
+</body>
+</html>

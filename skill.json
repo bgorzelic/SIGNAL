@@ -1,0 +1,17 @@
+{
+    "name": "signal-network",
+    "version": "0.1.0",
+    "description": "Comprehensive Network Intelligence Platform",
+    "author": "OpenClaw Community",
+    "dependencies": [
+        "python3",
+        "termux-api"
+    ],
+    "capabilities": [
+        "network_diagnostics",
+        "wireless_scanning",
+        "cloud_analysis"
+    ],
+    "install_script": "pip install signal-network",
+    "skill_type": "advanced_diagnostic"
+}
